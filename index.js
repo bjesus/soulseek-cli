@@ -62,6 +62,7 @@ program
           }
         ]).then((answers) => {
           const chosenUserFiles = filesByUser[answers.user];
+          var downloadedFilesCount = 0;
 
           chosenUserFiles.forEach(file => {
             const fileStructure = file.file.split('\\');
@@ -83,8 +84,12 @@ program
                 log(chalk.red(err));
                 process.exit();
               }
-
-              log(down);
+              downloadedFilesCount++;
+              log("("+downloadedFilesCount+"/"+chosenUserFiles.length+") Received: "+down.path);
+              if (downloadedFilesCount === chosenUserFiles.length) {
+                console.log("Done.")
+                process.exit()
+              }
             })
           });
         });
