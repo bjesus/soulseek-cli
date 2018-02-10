@@ -56,6 +56,7 @@ program
           {
             type: 'rawlist',
             name: 'user',
+            pageSize: 10,
             message: 'Choose a folder to download?',
             choices: _.keys(filesByUser)
           }
