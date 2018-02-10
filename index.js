@@ -6,6 +6,7 @@ const inquirer = require('inquirer');
 const path     = require('path');
 const program  = require('commander');
 const slsk     = require('slsk-client');
+const fs       = require('fs');
 const log      = console.log;
 const VERSION  = '0.0.1';
 
@@ -65,6 +66,11 @@ program
               file,
               path: __dirname + '/' + directory + '/' + filename
             };
+
+            let dir = __dirname + '/' + directory;
+            if (!fs.existsSync(dir)){
+                fs.mkdirSync(dir);
+            }
 
             client.download(data, (err, down) => {
               if (err) {
